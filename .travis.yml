@@ -1,0 +1,12 @@
+# Need super user permission for docker
+sudo: required
+# Need docker to run
+services:
+  - docker
+
+# Before running test
+before_install:
+  - dcoker build -t praja/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run praja/docker-react npm run test -- --coverage
