@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web:
+    build:
+      # working directory 
+      context: .
+      # check dockerfile inside docker context
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # bookmark
+      - /app/node_modules
+      # map external
+      - .:/app
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
