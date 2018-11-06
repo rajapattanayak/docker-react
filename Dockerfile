@@ -1,10 +1,17 @@
 # Build Phase
 FROM node:alpine as builder
+
 WORKDIR '/app'
-COPY package.json .
+
+#COPY package.json .
+# For AWS BeanStalk
+COPY package*.json ./
+
 RUN npm install
 COPY . .
+
 RUN npm run build
+
 
 # Run Phase
 FROM nginx
